@@ -1,9 +1,9 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { MealsContext } from '../store/available-meals-context';
 
 export default function ProductItem(props) {
   const mealsCtx = useContext(MealsContext);
-  //   console.log(props.meal);
+
   return (
     <div className="meal-item">
       <article>
@@ -16,7 +16,12 @@ export default function ProductItem(props) {
           <div className="meal-item-price">{`$${props.meal.price}`}</div>
           <p>{props.meal.description}</p>
           <div className="meal-item-actions">
-            <button className="button">Add To Cart</button>
+            <button
+              onClick={() => mealsCtx.addToCartHandler(props.meal)}
+              className="button"
+            >
+              Add To Cart
+            </button>
           </div>
         </div>
       </article>

@@ -6,6 +6,7 @@ import CartModal from './components/CartModal';
 function App() {
   const cartDialog = useRef();
   const [meals, setMeals] = useState(null);
+  const [cart, updateCart] = useState([]);
   useEffect(() => {
     fetch('http://localhost:3000/meals')
       .then((response) => {
@@ -14,15 +15,32 @@ function App() {
       .then((resData) => setMeals(resData));
   }, []);
 
-  const ctxValue = {
-    items: meals,
-  };
-
   function openCartHandler() {
     cartDialog.current.showModal();
   }
-  // console.log(meals);
 
+  function addToCartHandler(product) {
+    updateCart((prevState) => {
+      const updatedCart = prevState.map((item) => {
+        if (item.id === product.id) {
+          return { ...item, quantity: item.quantity + 1 };
+        } else {
+          return item;
+        }
+      });
+
+      if (!prevState.find((el) => el.id === product.id)) {
+        updatedCart.push({ ...product, quantity: 1 });
+      }
+      return updatedCart;
+    });
+  }
+  console.log(cart);
+  const ctxValue = {
+    items: meals,
+    addToCartHandler: addToCartHandler,
+    cartItems: cart,
+  };
   return (
     <MealsContext.Provider value={ctxValue}>
       <Header openCart={openCartHandler}></Header>
