@@ -35,11 +35,44 @@ function App() {
       return updatedCart;
     });
   }
+
+  function incrementProductValue(product) {
+    updateCart((prevState) => {
+      const updatedCart = prevState.map((item) => {
+        if (item.id === product.id) {
+          return { ...item, quantity: item.quantity + 1 };
+        } else {
+          return item;
+        }
+      });
+      return updatedCart;
+    });
+  }
+
+  function decrementProductValue(product) {
+    updateCart((prevState) => {
+      const updatedCart = prevState.map((item) => {
+        if (item.id === product.id) {
+          if (item.quantity > 0) {
+            return { ...item, quantity: item.quantity - 1 };
+          } else {
+            return { ...item, quantity: 0 };
+          }
+        } else {
+          return item;
+        }
+      });
+      return updatedCart;
+    });
+  }
+
   console.log(cart);
   const ctxValue = {
     items: meals,
     addToCartHandler: addToCartHandler,
     cartItems: cart,
+    incrementProductValue: incrementProductValue,
+    decrementProductValue: decrementProductValue,
   };
   return (
     <MealsContext.Provider value={ctxValue}>
