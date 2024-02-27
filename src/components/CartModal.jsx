@@ -3,17 +3,7 @@ import { MealsContext } from '../store/available-meals-context';
 
 const CartModal = forwardRef(function CartModal(props, ref) {
   const ctx = useContext(MealsContext);
-  let totalPrice = 0;
-  ctx.cartItems.map((item) => {
-    totalPrice += item.quantity * item.price;
-  });
 
-  let quantityNumber = 0;
-  ctx.cartItems.map((item) => {
-    quantityNumber += item.quantity;
-  });
-
-  //   console.log(ctx.cartItems);
   return (
     <dialog ref={ref} className="cart modal">
       <h2>Your Cart</h2>
@@ -39,10 +29,14 @@ const CartModal = forwardRef(function CartModal(props, ref) {
             }
           })}
       </ul>
-      {totalPrice > 0 && <div className="cart-total">{`$${totalPrice}`}</div>}
+      {ctx.totalPrice > 0 && (
+        <div className="cart-total">{`$${ctx.totalPrice}`}</div>
+      )}
       <form method="dialog" className="modal-actions">
         <button className="text-button">Close</button>
-        <button className="button">Go to Checkout</button>
+        <button className="button" onClick={ctx.goToCheckoutHandler}>
+          Go to Checkout
+        </button>
       </form>
     </dialog>
   );

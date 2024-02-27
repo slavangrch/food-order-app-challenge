@@ -208,6 +208,10 @@ h1 {
   gap: 1rem;
 }
 
+.invalid-input {
+  color: rgb(163, 50, 50);
+}
+
 .button {
   font: inherit;
   cursor: pointer;
@@ -251,6 +255,11 @@ h1 {
 
 .modal::backdrop {
   background-color: rgba(0, 0, 0, 0.55);
+}
+
+.error-heading {
+  text-align: center;
+  margin: 50px;
 }
 
 @keyframes fade-slide-up {

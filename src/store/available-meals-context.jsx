@@ -6,4 +6,10 @@ export const MealsContext = createContext({
   cartItems: null,
   incrementProductValue: () => {},
   decrementProductValue: () => {},
+  totalPrice: undefined,
+  goToCheckoutHandler: {},
+  closeCheckoutModal: {},
+  successHandler: {},
+  //   updateCartStateToInitial: {},
+  updateSuccessState: {},
 });

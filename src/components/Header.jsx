@@ -8,7 +8,7 @@ export default function Header(props) {
         <h1>Reactfood</h1>
       </div>
       <button className="text-button" onClick={props.openCart}>
-        Cart
+        {`Cart(${props.quantityNumber})`}
       </button>
     </div>
   );
